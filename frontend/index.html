@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder | Dijkstra Visualizer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">P</div>
+            <div>
+                <h1>PathFinder</h1>
+                <span>Shortest Path Visualizer</span>
+            </div>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Backend Python
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <div>
+                <span class="eyebrow">INVESTIGACIÓN DE OPERACIONES</span>
+                <h2>Algoritmo de Dijkstra</h2>
+                <p>Encuentra y visualiza el camino más corto entre dos nodos.</p>
+            </div>
+        </section>
+
+        <div class="workspace">
+
+            <!-- PANEL IZQUIERDO -->
+            <aside class="sidebar">
+
+                <div class="panel">
+                    <h3>Configuración del grafo</h3>
+
+                    <label>Agregar nodo</label>
+
+                    <div class="input-group">
+                        <input id="nodeName" placeholder="Ej. E">
+                        <button id="addNode" class="secondary-btn">+</button>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <label>Agregar conexión</label>
+
+                    <input id="edgeFrom" placeholder="Nodo origen">
+                    <input id="edgeTo" placeholder="Nodo destino">
+                    <input id="edgeWeight" type="number"
+                           min="0" step="any" placeholder="Peso">
+
+                    <button id="addEdge" class="secondary-btn full">
+                        Agregar conexión
+                    </button>
+
+                    <div class="divider"></div>
+
+                    <label>Tipo de grafo</label>
+
+                    <select id="directed">
+                        <option value="true">Dirigido</option>
+                        <option value="false">No dirigido</option>
+                    </select>
+
+                </div>
+
+                <div class="panel">
+                    <h3>Parámetros</h3>
+
+                    <label>Nodo de origen</label>
+                    <select id="source"></select>
+
+                    <label>Nodo de destino</label>
+                    <select id="target"></select>
+
+                    <button id="runAlgorithm" class="primary-btn full">
+                        ▶ Ejecutar Dijkstra
+                    </button>
+
+                    <button id="clearGraph" class="danger-btn full">
+                        Limpiar grafo
+                    </button>
+                </div>
+
+                <div class="panel">
+                    <h3>Estados</h3>
+
+                    <div class="legend">
+                        <span class="legend-color pending"></span>
+                        Sin explorar
+                    </div>
+
+                    <div class="legend">
+                        <span class="legend-color current"></span>
+                        Nodo actual
+                    </div>
+
+                    <div class="legend">
+                        <span class="legend-color visited"></span>
+                        Visitado
+                    </div>
+
+                    <div class="legend">
+                        <span class="legend-color optimal"></span>
+                        Ruta óptima
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- ÁREA PRINCIPAL -->
+            <section class="main-area">
+
+                <div class="panel graph-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Visualización del grafo</h3>
+                            <span>Red de nodos y conexiones</span>
+                        </div>
+
+                        <span id="graphCount" class="counter">
+                            0 nodos · 0 aristas
+                        </span>
+                    </div>
+
+                    <div id="cy"></div>
+
+                    <div class="controls">
+                        <button id="prevStep" class="secondary-btn">
+                            ◀ Anterior
+                        </button>
+
+                        <button id="playPause" class="primary-btn">
+                            ▶ Reproducir
+                        </button>
+
+                        <button id="nextStep" class="secondary-btn">
+                            Siguiente ▶
+                        </button>
+
+                        <button id="resetSteps" class="secondary-btn">
+                            ↺ Reiniciar
+                        </button>
+                    </div>
+
+                    <div class="progress-container">
+                        <div id="progressBar"></div>
+                    </div>
+
+                    <p id="stepInfo" class="step-info">
+                        Agrega un grafo y ejecuta el algoritmo.
+                    </p>
+
+                </div>
+
+                <div class="results-grid">
+
+                    <div class="panel">
+                        <h3>Resultado final</h3>
+
+                        <div class="result-label">Ruta más corta</div>
+                        <div id="shortestPath" class="result-value">
+                            --
+                        </div>
+
+                        <div class="result-label">Costo total</div>
+                        <div id="totalCost" class="cost">
+                            --
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Distancias mínimas</h3>
+
+                        <div id="distanceTable">
+                            <p class="muted">Sin resultados todavía.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <div id="notification" class="notification"></div>
+
+    </main>
+
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
